@@ -9,7 +9,7 @@ public class DbManager {
 	public Connection getConnection(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://138.68.89.66:3306/paivyri", "paivyri", "passu tähän");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://138.68.89.66:3306/paivyri", "paivyri", "JEEjorma");
 			return conn;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
