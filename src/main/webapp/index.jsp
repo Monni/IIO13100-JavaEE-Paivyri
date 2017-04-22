@@ -1,133 +1,118 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JAX-RS laskin esimerkki</title>
-	    <style>
-	        ul{
-	            list-style-type: none;
-	            padding: 10px;
-	            background-color: #AFE0EF;      
-	        }
-	        li{
-	            margin: 5px;
-	            margin-bottom: 15px;
-	            padding: 15px;
-	            background-color: #FFFFFF;      
-	            color: #000000;
-	        }
-	    </style>
-	    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	    <script>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Ruokap‰iv‰kirja</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+	<div id="mainContainer" class="contentBox">
+		<div>
+			<h1 class="centeredHeader">Ruokap‰iv‰kirja</h1>
+		</div>
+		<div class="container">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div>
+							<p class="basicText">	
+								Ruokap‰iv‰kirja on suunniteltu auttamaan syˆmisen seurantaa. Syˆmisrytmej‰ seuraamalla voidaan parantaa
+								treeni tuloksia. 
+								Ruokap‰iv‰kirjassa on mahdollista tallentaa omia aterioida ja niiden ravintopitoisuuksia. 
+								Lis‰ksi palvelu tarjoaa valmiiksi laskettuja keskiarvoja ja ruokarytmej‰ syˆtt‰miesi tietojen perusteella.
+							</p>
+							<form action="">
+								  <p class="basicText">Lis‰‰ uusi ruokailu:</p>
+								  <input type="text" name="kuka" value="" placeholder="Kuka sˆi?" required>
+								  <input type="text" name="pvm" value="" placeholder="P‰iv‰m‰‰r‰" required>
+								  <input type="text" name="klo" value="" placeholder="Kellonaika" required>
+								  <input type="text" name="ruoka" value="" placeholder="Mit‰ sˆit?" required>
+								  <br>
+								  <br>
+								  <input type="text" name="ruoanMaara" value="" placeholder="Ruoan m‰‰r‰ (g)" required>
+								  <input type="text" name="kalorit" value="" placeholder="Kalorit per 100g" required>
+								  <input type="text" name="hiilarit" value="" placeholder="Hiilihydraatit per 100g">
+								  <input type="text" name="proteiinit" value="" placeholder="Proteiini per 100g">
+								  <br>
+								  <br>
+								  <input type="text" name="rasvat" value="" placeholder="Rasvat per 100g">
+								  
+								  <br>
+								  <br>
+								  <div>
+									  <input type="submit" value="Tallenna ruokailu">
+								  </div>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-1">
+						
+					</div>
+					<div class="col-md-3">
+						<div class="rightSidebar">
+							<h3 class="basicText">Hae tuloksia</h3>
+							<form action="">
+								  <p class="basicText">K‰ytt‰j‰n nimi:</p>
+								  <input type="text" name="firstname" value="" placeholder="Tepi" required>
+								  <br>
+								  <br>
+								  <input type="submit" value="Hae">
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id="stats">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="centeredSmallHeader">Haetun k‰ytt‰j‰n tietoja</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<h3 class="centered basicText">Ateriakoko & syˆmisrytmi</h3>
+							<br>
+							<h4 class="basicText" id="ateriakoko">Keskim‰‰r‰inen ateriakoko:</h4>
+							<h4 class="basicText" id="ateriatPaivassa">Aterioita p‰iv‰ss‰:</h4>
+							<h4 class="basicText" id="syomisrytmi">Keskim‰‰r‰inen ateria v‰li:</h4>
+						</div>
+						<div class="col-md-6">
+							<h3 class="centered basicText">Viikon ravintoaineet</h3>
+							<div id="piechart_3d"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		google.charts.load("current", {packages:["corechart"]});
+    	google.charts.setOnLoadCallback(drawChart);
     	
-    	function validate() {
-    		
-    		var left = document.getElementById("left");
-    		var right = document.getElementById("right");
-    		var valid = true;
-    		
-    		if (left.value.length > 0 && !$.isNumeric(left.value)) {
-    			alert("Sy√∂t√§ numeroarvo vasemmanpuoleiseen kentt√§√§n!");
-    			valid = false;
-    		}
-    		
-    		if (right.value.length > 0 && !$.isNumeric(right.value)) {
-    			alert("Sy√∂t√§ numeroarvo oikeanpuoleiseen kentt√§√§n!");
-    			valid = false;
-    		}
-    		
-    		// √Ñl√§ salli negatiivisia arvoja
-    		if (left.value.length > 0 && left.value < 0) {
-    			alert("Vasen arvo ei saa olla negatiivinen!");
-    			valid = false;
-    		}
-    		if (right.value.length > 0 && right.value < 0) {
-    			alert("Oikea arvo ei saa olla negatiivinen!");
-    			valid = false;
-    		}
-    		return valid;
-    	}
-	    
-	    	$.ajaxSetup({
-	    		contentType: "application/json; charset=utf-8",
-	    		dataType: "json"
-	    	});
-	    
-	    	$(document).ready(function(){
-	    		$('#ajaxform').submit(function(e) {
-	    			
-	    			var valid = validate();
-	    			if (valid) {
-		    			var $f = $('#ajaxform');
-		    			var formAsJson = $('#ajaxform').serializeFormJSON();
-		    			$.ajax({
-		    				url: '/rest/calculator/calcform',
-		    				type: 'POST',
-		    				data: JSON.stringify(formAsJson),
-		    				error: function(jqXHR, textStatus, errorThrown) {
-		    					alert(errorThrown);
-		    				}
-		    			});
-		    			e.preventDefault();	
-	    			}
-	    		});
-	    	});	    
-	    
-	    	(function ($) {
-	    		$.fn.serializeFormJSON = function () {
-	    			var objectGraph = {};
-	    			var arr = this.serializeArray();
-	    			$.each(arr, function () {
-	    				if (objectGraph[this.name]) {
-	    					if (!objectGraph[this.name].push) {
-	    						objectGraph[this.name] = [objectGraph[this.name]];
-	    					}
-	    					objectGraph[this.name].push(this.value || '');
-	    				} else {
-	    					objectGraph[this.name] = this.value || '';
-	    				}
-	    			});
-	    			return objectGraph;
-	    		};
-	    	})(jQuery);
-	    	
-	    	$('#ajaxform').submit(function (e) {
-	    		e.preventDefault();
-	    		var data = $(this).serializeFormJSON();
-	    		console.log(data);
-	    	});
+    	function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Ravintoaineet'],
+              ['Proteiini', 52],
+              ['Hiilihydraatit', 145],
+              ['Rasvat', 28]
+            ]);
 
-	    </script>
+            var options = {
+       	      legend: {
+       	        textStyle: { color: 'white' }
+       	      },
+              title: '',
+              backgroundColor: 'transparent',
+              is3D: true,
+            };
 
-    </head>
-    <body>
-        <h1>Esimerkit JAX-RS-ohjelmoinnista</h1>
-
-        <p>T√§m√§ on esimerkki JAX-RS kutsujen teosta. Toisessa esimerkissa k√§ytet√§√§n GET-kutsuja ja toisessa POST.
-		<ul>
-        	<li>Summa-operaatio: <a href="/rest/calculator/calc/add/">/rest/calculator/calc/add/{vasen}/{oikea}</a></li>
-        	<li>Erotus-operaatio: <a href="/rest/calculator/calc/substract/">/rest/calculator/calc/subtract/{vasen}/{oikea}</a></li>
-        	<li>Tulo-operaatio: <a href="/rest/calculator/calc/multiply/">/rest/calculator/calc/multiply/{vasen}/{oikea}</a></li>
-        	<li>Jako-operaatio: <a href="/rest/calculator/calc/divide/">/rest/calculator/calc/divide/{vasen}/{oikea}</a></li>
-		</ul>
-
-        <div>Ohjelma vastaanottaa my√∂s POST-kutsuja, joita voi tehd√§ seuraavalla lomakkeella:</div>
-        <br>
-
-		<form enctype="application/json" action="#" name="ajaxform" id="ajaxform" method="post">
-		  <!-- L√§hetet√§√§n parametrej√§ action="/rest/calculator/calcform"-->
-		  <table>
-		  	<tr><td>Vasen:</td><td>Operaatio:</td><td>Oikea:</td><td>&nbsp;</td></tr>
-		  	<tr>
-		  		<td><input type="text" name="left" id="left"/></td>
-		  		<td><input type="text" name="operation" /></td>
-		  		<td><input type="text" name="right" id="right"/></td>
-		  		<td><input type="submit" value="L√§het√§" id="calcpost" /></td>
-		  	</tr>		  	
-		  </table> 
-		</form>   
-		</br>
-		<a href="naytalaskut.jsp">N√§yt√§ kaikki laskut tietokannasta</a>     
-    </body>
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+          }
+	</script>
+</body>
 </html>

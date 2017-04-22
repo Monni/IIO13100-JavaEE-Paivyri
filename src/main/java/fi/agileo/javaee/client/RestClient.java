@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fi.agileo.javaee.api.Calculation;
 import fi.agileo.javaee.api.Ruokailu;
 
 public class RestClient {
@@ -35,7 +34,7 @@ public class RestClient {
 					.request(MediaType.APPLICATION_JSON_TYPE).get();
 			return response.readEntity(Ruokailu.class);
 		} catch (UnsupportedEncodingException e) {
-			LOG.error("Request failedasd", e);
+			LOG.error("Request failed", e);
 			return null;
 		}
 	}

@@ -13,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import fi.agileo.javaee.api.Calculation;
+
 
 @Path("/calculator")
 public class Calculator {
@@ -21,7 +21,7 @@ public class Calculator {
 	private EntityManagerFactory tehdas;
 	private EntityManager manageri;; 
 	private EntityTransaction transaktio;
-	
+	/*
 	public Calculator() {
 		this.tehdas = Persistence.createEntityManagerFactory("Ruokailu");
 		this.manageri = tehdas.createEntityManager(); 
@@ -79,6 +79,6 @@ public class Calculator {
 		transaktio.commit();
 		
 		return c;
-	}
+	}*/
 
 }

@@ -3,16 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-	<servlet>
+<servlet>
 		<servlet-name>RuokailuTehdas</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>fi.agileo.javaee.jaxrs.CalculatorApp</param-value>
+			<param-value>fi.agileo.javaee.jaxrs.RuokailuApp</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RuokailuTehdas</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
+		<url-pattern>/paivyri/*</url-pattern>
 	</servlet-mapping>
 </web-app>
+
