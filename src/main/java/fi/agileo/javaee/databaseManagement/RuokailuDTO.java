@@ -15,7 +15,7 @@ public class RuokailuDTO {
 	private int proteiinit;
 	private int rasvat;
 	
-	RuokailuDTO() {
+	public RuokailuDTO() {
 		System.out.println("Created RuokailuDTO");
 	}
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fi.agileo.javaee.api.Ruokailu;
+import fi.agileo.javaee.databaseManagement.RuokailuDTO;
 import fi.agileo.javaee.service.RuokailuService;
 
 
@@ -31,7 +32,7 @@ public class RuokailuController {
 	// Näytetään index tietyn käyttäjän tiedoilla
 	@RequestMapping(value ="/findbyuser", method = RequestMethod.GET)
 	public String indexWithUserData(@RequestParam(value="firstname", required=true) String username, Model model) {
-		List<Ruokailu> ruokailuList = ruokailuService.findByUser(username);
+		List<RuokailuDTO> ruokailuList = ruokailuService.findByID(username);
 		model.addAttribute("ruokailuList", ruokailuList);
 		return "index";
 	}
@@ -50,7 +51,7 @@ public class RuokailuController {
 			@RequestParam(value="rasvat", required=false) String rasvat,
 			Model model) {
 		
-		Ruokailu ruokailu = new Ruokailu();
+		RuokailuDTO ruokailu = new RuokailuDTO();
 		ruokailu.setNimi(nimi);
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
@@ -61,21 +62,22 @@ public class RuokailuController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        java.sql.Date sql = new java.sql.Date(parsed.getTime());
-		ruokailu.setPvm(sql);
+        java.sql.Date sqldate = new java.sql.Date(parsed.getTime());
+		ruokailu.setDate(sqldate);
 		
 		
 		ruokailu.setKlo(klo);
-		ruokailu.setRuoanmaara(Integer.parseInt(ruoanMaara));
+		ruokailu.setRuoanNimi(ruoka);
+		ruokailu.setRuoanMaara(Integer.parseInt(ruoanMaara));
 		ruokailu.setKalorit(Integer.parseInt(kalorit));
 		if (!hiilarit.isEmpty()) {
 			ruokailu.setHiilihydraatit(Integer.parseInt(hiilarit));
 		}
 		if (!proteiinit.isEmpty()) {
-			ruokailu.setProteiini(Integer.parseInt(proteiinit));
+			ruokailu.setProteiinit(Integer.parseInt(proteiinit));
 		}
 		if (!rasvat.isEmpty()) {
-			ruokailu.setRasva(Integer.parseInt(rasvat));
+			ruokailu.setRasvat(Integer.parseInt(rasvat));
 		}
 		
 		ruokailuService.create(ruokailu);
