@@ -79,7 +79,7 @@
 						<div class="col-md-6">
 							<h3 class="centered basicText">Ateriakoko & syˆmisrytmi</h3>
 							<br>
-							<h4 class="basicText" id="ateriakoko">Keskim‰‰r‰inen ateriakoko:</h4>
+							<h4 class="basicText" id="ateriakoko">Keskim‰‰r‰inen ateriakoko: ${ruokailuMedianModel.medianAteriakoko} g</h4>
 							<h4 class="basicText" id="ateriatPaivassa">Aterioita p‰iv‰ss‰:</h4>
 							<h4 class="basicText" id="syomisrytmi">Keskim‰‰r‰inen ateriav‰li:</h4>
 						</div>
@@ -99,9 +99,9 @@
     	function drawChart() {
             var data = google.visualization.arrayToDataTable([
               ['Task', 'Ravintoaineet'],
-              ['Proteiini', 52],
-              ['Hiilihydraatit', 145],
-              ['Rasvat', 28]
+              ['Proteiini', ${ruokailuMedianModel.medianProteiinit}],
+              ['Hiilihydraatit', ${ruokailuMedianModel.medianHiilihydraatit}],
+              ['Rasvat', ${ruokailuMedianModel.medianRasvat}]
             ]);
 
             var options = {

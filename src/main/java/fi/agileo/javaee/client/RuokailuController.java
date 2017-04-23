@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fi.agileo.javaee.api.RuokailuMedianModel;
 import fi.agileo.javaee.databaseManagement.RuokailuDTO;
 import fi.agileo.javaee.service.RuokailuService;
 
@@ -40,13 +41,16 @@ public class RuokailuController {
 		int medianProteiinit = medianProteiinit(ruokailuList);
 		int medianRasvat = medianRasvat(ruokailuList);
 		
+		RuokailuMedianModel ruokailuMedianModel = new RuokailuMedianModel();
+		ruokailuMedianModel.setUsername(username);
+		ruokailuMedianModel.setMedianAteriakoko(medianAteriakoko);
+		ruokailuMedianModel.setMedianHiilihydraatit(medianHiilihydraatit);
+		ruokailuMedianModel.setMedianProteiinit(medianProteiinit);
+		ruokailuMedianModel.setMedianRasvat(medianRasvat);
 		// Add to model
 		model.addAttribute("ruokailuList", ruokailuList); // Tarvitaanko?
 		model.addAttribute("username", username);
-		model.addAttribute("medianAteriakoko", medianAteriakoko);
-		model.addAttribute("medianHiilihydraatit", medianHiilihydraatit);
-		model.addAttribute("medianProteiinit", medianProteiinit);
-		model.addAttribute("medianRasvat", medianRasvat);
+		model.addAttribute("ruokailuMedianModel", ruokailuMedianModel);
 		return "index";
 	}
 	
