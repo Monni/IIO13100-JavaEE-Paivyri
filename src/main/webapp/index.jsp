@@ -78,11 +78,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<h3 class="centered basicText">Ateriakoko & syömisrytmi</h3>
+							<h3 class="centered basicText">Ateriakoko</h3>
 							<br>
 							<h4 class="basicText" id="ateriakoko">Keskimääräinen ateriakoko: ${ruokailuMedianModel.medianAteriakoko} g</h4>
-							<h4 class="basicText" id="ateriatPaivassa">Aterioita päivässä:</h4>
-							<h4 class="basicText" id="syomisrytmi">Keskimääräinen ateriaväli:</h4>
 						</div>
 						<div class="col-md-6">
 							<h3 class="centered basicText">Viikon ravintoaineet</h3>
