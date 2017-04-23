@@ -1,4 +1,4 @@
-package Paivyri.solution;
+package fi.turbotiimi.paivyri.api;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
