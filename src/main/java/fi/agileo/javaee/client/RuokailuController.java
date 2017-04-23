@@ -72,7 +72,7 @@ public class RuokailuController {
 		RuokailuDTO ruokailu = new RuokailuDTO();
 		ruokailu.setNimi(nimi);
 		
-		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         Date parsed = null;
 		try {
 			parsed = format.parse(pvm);

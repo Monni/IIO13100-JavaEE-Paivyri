@@ -2,6 +2,7 @@ package fi.agileo.javaee.jaxrs;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -10,9 +11,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import fi.agileo.javaee.databaseManagement.RuokailuDAO;
 import fi.agileo.javaee.databaseManagement.RuokailuDTO;
 import fi.agileo.javaee.service.RuokailuService;
 
+@Stateless
 @Path("/ruokailu")
 public class RuokailuTehdas {
 		
@@ -23,9 +26,11 @@ public class RuokailuTehdas {
 		
 		// Tällä palautetaan kaikki ruokailuoliot listana tietokannasta
 		@GET
+		@Path("/")
 		@Produces(MediaType.APPLICATION_JSON)
 		public List<RuokailuDTO> findAll() {
-			List<RuokailuDTO> ruokailuList = ruokailuService.findAll();
+			RuokailuDAO ruokailuDao = new RuokailuDAO();
+			List<RuokailuDTO> ruokailuList = ruokailuDao.findAll();
 			return ruokailuList;
 		}
 		
@@ -34,7 +39,8 @@ public class RuokailuTehdas {
 		@Path("/{username}")
 		@Produces(MediaType.APPLICATION_JSON)
 		public List<RuokailuDTO> findByUser(@PathParam("username") String username) {
-			List<RuokailuDTO> ruokailuList = ruokailuService.findByID(username);
+			RuokailuDAO ruokailuDao = new RuokailuDAO();
+			List<RuokailuDTO> ruokailuList = ruokailuDao.findByID(username);
 			return ruokailuList;
 		}
 

@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fi.agileo.javaee.api.Ruokailu;
+import fi.agileo.javaee.databaseManagement.RuokailuDTO;
 
 public class RestClient {
 
@@ -26,12 +27,12 @@ public class RestClient {
 		target = client.target("http://localhost:9080").path("paivyri");
 	}
 
-	public Ruokailu ruokailu(String henkilo) {
+	public RuokailuDTO ruokailu(String henkilo) {
 		try {
 			Response response = target.path("ruokailu")
 					.path(URLEncoder.encode(henkilo, "UTF-8"))
 					.request(MediaType.APPLICATION_JSON_TYPE).get();
-			return response.readEntity(Ruokailu.class);
+			return response.readEntity(RuokailuDTO.class);
 		} catch (UnsupportedEncodingException e) {
 			LOG.error("Request failed", e);
 			return null;
