@@ -1,4 +1,4 @@
-package fi.agileo.javaee.configuration;
+package fi.turbotiimi.paivyri.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

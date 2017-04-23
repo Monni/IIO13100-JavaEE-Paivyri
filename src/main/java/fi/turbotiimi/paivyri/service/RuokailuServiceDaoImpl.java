@@ -1,16 +1,12 @@
-package fi.agileo.javaee.service;
+package fi.turbotiimi.paivyri.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import fi.agileo.javaee.api.Ruokailu;
-import fi.agileo.javaee.databaseManagement.RuokailuDAO;
-import fi.agileo.javaee.databaseManagement.RuokailuDTO;
+import fi.turbotiimi.paivyri.databaseManagement.RuokailuDAO;
+import fi.turbotiimi.paivyri.databaseManagement.RuokailuDTO;
 
 @Service
 @Primary

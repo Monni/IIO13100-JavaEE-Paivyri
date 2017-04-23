@@ -1,4 +1,4 @@
-package fi.agileo.javaee.configuration;
+package fi.turbotiimi.paivyri.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.JstlView;
  
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "fi.agileo.javaee")
+@ComponentScan(basePackages = "fi.turbotiimi.paivyri")
 public class SpringServletConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {

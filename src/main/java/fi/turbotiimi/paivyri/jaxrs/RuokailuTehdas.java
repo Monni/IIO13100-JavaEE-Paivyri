@@ -1,4 +1,4 @@
-package fi.agileo.javaee.jaxrs;
+package fi.turbotiimi.paivyri.jaxrs;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import fi.agileo.javaee.databaseManagement.RuokailuDAO;
-import fi.agileo.javaee.databaseManagement.RuokailuDTO;
-import fi.agileo.javaee.service.RuokailuService;
+import fi.turbotiimi.paivyri.databaseManagement.RuokailuDAO;
+import fi.turbotiimi.paivyri.databaseManagement.RuokailuDTO;
+import fi.turbotiimi.paivyri.service.RuokailuService;
 
 @Stateless
 @Path("/ruokailu")

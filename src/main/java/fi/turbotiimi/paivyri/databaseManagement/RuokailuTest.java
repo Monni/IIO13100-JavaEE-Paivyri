@@ -1,4 +1,4 @@
-package fi.agileo.javaee.databaseManagement;
+package fi.turbotiimi.paivyri.databaseManagement;
 
 import java.sql.Connection;
 import java.sql.Statement;

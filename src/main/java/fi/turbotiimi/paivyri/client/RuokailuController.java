@@ -1,4 +1,4 @@
-package fi.agileo.javaee.client;
+package fi.turbotiimi.paivyri.client;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fi.agileo.javaee.api.RuokailuMedianModel;
-import fi.agileo.javaee.databaseManagement.RuokailuDTO;
-import fi.agileo.javaee.service.RuokailuService;
+import fi.turbotiimi.paivyri.api.RuokailuMedianModel;
+import fi.turbotiimi.paivyri.databaseManagement.RuokailuDTO;
+import fi.turbotiimi.paivyri.service.RuokailuService;
 
 
 @Controller

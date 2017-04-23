@@ -1,4 +1,4 @@
-package fi.agileo.javaee.api;
+package fi.turbotiimi.paivyri.api;
 
 public class RuokailuMedianModel {
 

@@ -1,4 +1,4 @@
-package fi.agileo.javaee.client;
+package fi.turbotiimi.paivyri.client;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -12,8 +12,7 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fi.agileo.javaee.api.Ruokailu;
-import fi.agileo.javaee.databaseManagement.RuokailuDTO;
+import fi.turbotiimi.paivyri.databaseManagement.RuokailuDTO;
 
 public class RestClient {
 
@@ -39,28 +38,4 @@ public class RestClient {
 		}
 	}
 	
-	/*
-	public Calculation calc(String op, int left, int right) {
-		try {
-			Response response = target.path("calc")
-					.path(URLEncoder.encode(op, "UTF-8"))
-					.path(URLEncoder.encode(Integer.toString(left), "UTF-8"))
-					.path(URLEncoder.encode(Integer.toString(right), "UTF-8"))
-					.request(MediaType.APPLICATION_JSON_TYPE).get();
-			return response.readEntity(Calculation.class);
-		} catch (UnsupportedEncodingException e) {
-			LOG.error("Request failed", e);
-			return null;
-		}
-	}
-*/
-	/*public Calculation calc2(Calculation in) {
-		Response response = target.path("calcform")
-				.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.json(in));
-		return response.readEntity(Calculation.class);
-	}*/
-
-
-
-
 }
