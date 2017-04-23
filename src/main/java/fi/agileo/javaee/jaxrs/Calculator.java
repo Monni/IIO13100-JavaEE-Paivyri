@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 
 
-@Path("/calculator")
+//@Path("/calculator")
 public class Calculator {
 	// Luodaan entitymanageri
 	private EntityManagerFactory tehdas;

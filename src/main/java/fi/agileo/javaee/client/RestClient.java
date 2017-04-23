@@ -5,7 +5,6 @@ import java.net.URLEncoder;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -60,39 +59,7 @@ public class RestClient {
 		return response.readEntity(Calculation.class);
 	}*/
 
-	//public static void main(String[] args) {
-	//	RestClient client = new RestClient();
-		/*client.print(client.calc("add", 3, 2));
-		client.print(client.calc("subtract", 20, 2));
-		client.print(client.calc("multiply", 5, 3));
-		client.print(client.calc("divide", 20, 2));
-
-		client.print(client.calc2(new Calculation("add", 50, 50)));
-		client.print(client.calc2(new Calculation("subtract", 60, 40)));
-		client.print(client.calc2(new Calculation("multiply", 25, 12)));
-		client.print(client.calc2(new Calculation("divide", 16, 5)));*/
-	//}
 
 
-	/*
-	
-	public void print(Calculation c) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getLeft());
-		String op = c.getOperation();
-		if (op.equalsIgnoreCase("-")) {
-			sb.append(" - ");
-		} else if (op.equalsIgnoreCase("*")) {
-			sb.append(" * ");
-		} else if (op.equalsIgnoreCase("/")) {
-			sb.append(" / ");
-		} else {
-			sb.append(" + ");
-		}
-		sb.append(c.getRight());
-		sb.append(" = ");
-		sb.append(c.getResult());
-		System.out.println(sb.toString());
-	}
-*/
+
 }
