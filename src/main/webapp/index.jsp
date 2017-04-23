@@ -32,18 +32,18 @@
 							<form action="/save">
 								  <p class="basicText">Lis‰‰ uusi ruokailu:</p>
 								  <input type="text" name="kuka" value="" placeholder="Kuka sˆi?" required>
-								  <input type="text" name="pvm" value="" placeholder="P‰iv‰m‰‰r‰" required>
-								  <input type="text" name="klo" value="" placeholder="Kellonaika" required>
+								  <input type="date" name="pvm" value="" placeholder="P‰iv‰m‰‰r‰" required>
+								  <input type="time" name="klo" value="" placeholder="Kellonaika" required>
 								  <input type="text" name="ruoka" value="" placeholder="Mit‰ sˆit?" required>
 								  <br>
 								  <br>
-								  <input type="text" name="ruoanMaara" value="" placeholder="Ruoan m‰‰r‰ (g)" required>
-								  <input type="text" name="kalorit" value="" placeholder="Kalorit per 100g" required>
-								  <input type="text" name="hiilarit" value="" placeholder="Hiilihydraatit per 100g">
-								  <input type="text" name="proteiinit" value="" placeholder="Proteiini per 100g">
+								  <input type="number" name="ruoanMaara" value="" placeholder="Ruoan m‰‰r‰ (g)" required>
+								  <input type="number" name="kalorit" value="" placeholder="Kalorit per 100g" required>
+								  <input type="number" name="hiilarit" value="" placeholder="Hiilihydraatit per 100g">
+								  <input type="number" name="proteiinit" value="" placeholder="Proteiini per 100g">
 								  <br>
 								  <br>
-								  <input type="text" name="rasvat" value="" placeholder="Rasvat per 100g">
+								  <input type="number" name="rasvat" value="" placeholder="Rasvat per 100g">
 								  
 								  <br>
 								  <br>
