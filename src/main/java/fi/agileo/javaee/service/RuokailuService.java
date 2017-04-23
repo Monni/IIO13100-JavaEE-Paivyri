@@ -8,7 +8,5 @@ public interface RuokailuService {
 	List<Ruokailu> findAll();
 	List<Ruokailu> findByUser(String username);
 	Ruokailu create(Ruokailu ruokailu);
-	Ruokailu edit(Ruokailu ruokailu);
-	Ruokailu deleteById(int id);
-
+	Ruokailu deleteAll(String username);
 }

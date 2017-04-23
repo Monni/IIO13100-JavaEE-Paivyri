@@ -30,7 +30,7 @@ public class Ruokailu implements Serializable {
 	private Date pvm;
 	
 	@Column(name = "Klo")
-	private Time klo;
+	private String klo;
 	
 	@Column(name = "Nimi")
 	private String nimi;
@@ -57,7 +57,7 @@ public class Ruokailu implements Serializable {
 		super();
 	}
 	
-	public Ruokailu(Date pvm, Time klo, String nimi, String ruoannimi, int ruoanmaara, int kalorit) {
+	public Ruokailu(Date pvm, String klo, String nimi, String ruoannimi, int ruoanmaara, int kalorit) {
 		super();
 		this.pvm = pvm;
 		this.klo = klo;
@@ -67,7 +67,7 @@ public class Ruokailu implements Serializable {
 		this.kalorit = kalorit;
 	}
 	
-	public Ruokailu(Date pvm, Time klo, String nimi, String ruoannimi, int ruoanmaara, int kalorit, int hiilihydraatit, int proteiini, int rasva) {
+	public Ruokailu(Date pvm, String klo, String nimi, String ruoannimi, int ruoanmaara, int kalorit, int hiilihydraatit, int proteiini, int rasva) {
 		super();
 		this.pvm = pvm;
 		this.klo = klo;
@@ -88,12 +88,12 @@ public class Ruokailu implements Serializable {
 		this.pvm = pvm;
 	}
 
-	public Time getKlo() {
+	public String getKlo() {
 		return klo;
 	}
 
-	public void setKlo(Time klo) {
-		this.klo = klo;
+	public void setKlo(String klo2) {
+		this.klo = klo2;
 	}
 
 	public String getNimi() {

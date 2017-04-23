@@ -13,32 +13,34 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import fi.agileo.javaee.api.Ruokailu;
+import fi.agileo.javaee.service.RuokailuService;
 
 @Path("/ruokailu")
 public class RuokailuTehdas {
 		
 		public RuokailuTehdas() {}
 		
+		@Autowired
+		private RuokailuService ruokailuService;
+		
 		// Tällä palautetaan kaikki ruokailuoliot listana tietokannasta
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		public List<Ruokailu> findAll() {
-			// TODO Tähän pyydetään DAOsta kaikki
-			List<Ruokailu> ruokailuList = null;
-			
+			List<Ruokailu> ruokailuList = ruokailuService.findAll();
 			return ruokailuList;
 		}
 		
 		// Tällä palautetaan ruokailuolioita listana henkilön nimen perusteella
 		@GET
-		@Path("/{henkilo}")
+		@Path("/{username}")
 		@Produces(MediaType.APPLICATION_JSON)
-		public String findByHenkilo(@PathParam("henkilo") String henkilo) {
-			//Ruokailu ruokailu = new Ruokailu();
-			//ruokailu.setNimi("asd");
-			String ruokailu = "Lollo";
-			return ruokailu;
+		public List<Ruokailu> findByUser(@PathParam("username") String username) {
+			List<Ruokailu> ruokailuList = ruokailuService.findByUser(username);
+			return ruokailuList;
 		}
 
 }

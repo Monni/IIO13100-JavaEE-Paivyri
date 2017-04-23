@@ -1,4 +1,4 @@
-package databaseManagement;
+package fi.agileo.javaee.databaseManagement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

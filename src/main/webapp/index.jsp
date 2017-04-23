@@ -25,11 +25,11 @@
 						<div>
 							<p class="basicText">	
 								Ruokapäiväkirja on suunniteltu auttamaan syömisen seurantaa. Syömisrytmejä seuraamalla voidaan parantaa
-								treeni tuloksia. 
+								treenituloksia. 
 								Ruokapäiväkirjassa on mahdollista tallentaa omia aterioida ja niiden ravintopitoisuuksia. 
 								Lisäksi palvelu tarjoaa valmiiksi laskettuja keskiarvoja ja ruokarytmejä syöttämiesi tietojen perusteella.
 							</p>
-							<form action="">
+							<form action="/save">
 								  <p class="basicText">Lisää uusi ruokailu:</p>
 								  <input type="text" name="kuka" value="" placeholder="Kuka söi?" required>
 								  <input type="text" name="pvm" value="" placeholder="Päivämäärä" required>
@@ -48,7 +48,7 @@
 								  <br>
 								  <br>
 								  <div>
-									  <input type="submit" value="Tallenna ruokailu">
+									  <input type="submit" value="Tallenna ruokailu" src="save/">
 								  </div>
 							</form>
 						</div>
@@ -59,7 +59,7 @@
 					<div class="col-md-3">
 						<div class="rightSidebar">
 							<h3 class="basicText">Hae tuloksia</h3>
-							<form action="" method="post">
+							<form action="/findbyuser">
 								  <p class="basicText">Käyttäjän nimi:</p>
 								  <input type="text" name="firstname" value="" placeholder="Tepi" required>
 								  <br>
@@ -81,7 +81,7 @@
 							<br>
 							<h4 class="basicText" id="ateriakoko">Keskimääräinen ateriakoko:</h4>
 							<h4 class="basicText" id="ateriatPaivassa">Aterioita päivässä:</h4>
-							<h4 class="basicText" id="syomisrytmi">Keskimääräinen ateria väli:</h4>
+							<h4 class="basicText" id="syomisrytmi">Keskimääräinen ateriaväli:</h4>
 						</div>
 						<div class="col-md-6">
 							<h3 class="centered basicText">Viikon ravintoaineet</h3>
