@@ -29,8 +29,41 @@ public class RuokailuDAO {
 			System.out.println("CONNECTED");
 		}
 	}
-	 
-	public void PrintDB() {
+	
+	public List<RuokailuDTO> findByID(String name){
+		System.out.println("QUERY BY NAME");
+		ruokailut.clear();
+		String sql = "Select * from ruokailu WHERE nimi=?";
+		try {
+			PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+			stmt.setString(1, name);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				RuokailuDTO ruokailu = new RuokailuDTO();
+			    ruokailu.setID(rs.getInt("ID"));
+			    ruokailu.setDate(rs.getDate("Pvm"));
+			    ruokailu.setKlo(rs.getString("Klo"));
+			    ruokailu.setNimi(rs.getString("Nimi"));
+			    ruokailu.setRuoanNimi(rs.getString("Ruoannimi"));
+			    ruokailu.setRuoanMaara(rs.getInt("Ruoanmaara"));
+			    ruokailu.setKalorit(rs.getInt("Kalorit"));
+			    ruokailu.setHiilihydraatit(rs.getInt("Hiilihydraatit"));
+			    ruokailu.setProteiinit(rs.getInt("Proteiini"));
+			    ruokailu.setRasvat(rs.getInt("Rasva"));
+			    ruokailu.printRuokailu();
+			    ruokailut.add(ruokailu);
+			}
+	  } 
+	  catch (SQLException e) {
+		e.printStackTrace();
+	  }
+		return ruokailut;
+	}
+	
+	//For Debugging
+	public List<RuokailuDTO> findAll() {
+		System.out.println("QUERY ALL");
+		ruokailut.clear();
 		String sql = "Select * from ruokailu";
 		try {		  	 
 			Statement stmt = (Statement) conn.createStatement();
@@ -54,13 +87,41 @@ public class RuokailuDAO {
 	  catch (SQLException e) {
 		e.printStackTrace();
 	  }
+		return ruokailut;
 	}
 	
-	public void InsertToDB(){
-		RuokailuDTO ruokailu = new RuokailuDTO();
+	public void delete(int ID){
+		System.out.println("DELETE BY ID");
+		String sql = "Delete from ruokailu WHERE ID=?";
+		try {
+			PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+			stmt.setInt(1, ID);
+			stmt.executeUpdate();
+			System.out.println("ROW DELETED WHERE ID IS " + ID);
+	  } 
+	  catch (SQLException e) {
+		e.printStackTrace();
+	  }
+	}
+	
+	public void deleteAll(String name){
+		System.out.println("DELETE ALL");
+		String sql = "Delete from ruokailu WHERE Nimi=?";
+		try {
+			PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+			stmt.setString(1, name);
+			stmt.executeUpdate();
+			System.out.println("All ROWS DELETED WHERE NAME IS " + name);
+	  } 
+	  catch (SQLException e) {
+		e.printStackTrace();
+	  }
+	}
+	
+	public void save(RuokailuDTO ruokailu){
 		
 		//Mokki datat
-		java.sql.Date currentDate = new java.sql.Date(1980-05-21);
+		/*java.sql.Date currentDate = new java.sql.Date(1980-05-21);
 		System.out.println(currentDate);
 		ruokailu.setDate(currentDate);
 		ruokailu.setKlo("10:30");
@@ -70,7 +131,7 @@ public class RuokailuDAO {
 		ruokailu.setKalorit(172);
 		ruokailu.setHiilihydraatit(23);
 		ruokailu.setProteiinit(12);
-		ruokailu.setRasvat(10);
+		ruokailu.setRasvat(10);*/
 		
 		//prints whole DTO
 		System.out.println(ruokailu.getDate() + ", " + ruokailu.getKlo() + ", " + ruokailu.getNimi() + ", " + ruokailu.getRuoanNimi() + ", " + ruokailu.getRuoanMaara() + ", " + ruokailu.getKalorit() + ", " + ruokailu.getHiilihydraatit() + ", " + ruokailu.getProteiinit() + ", " + ruokailu.getRasvat() );
@@ -86,7 +147,6 @@ public class RuokailuDAO {
 			stmt.setString(3, ruokailu.getNimi());
 			stmt.setString(4, ruokailu.getRuoanNimi());
 			stmt.setDouble(5, ruokailu.getRuoanMaara());
-			System.out.println("täällä");
 			stmt.setDouble(6, ruokailu.getKalorit());
 			stmt.setDouble(7, ruokailu.getHiilihydraatit());
 			stmt.setDouble(8, ruokailu.getProteiinit());

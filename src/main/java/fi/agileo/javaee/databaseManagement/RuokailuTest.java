@@ -12,7 +12,11 @@ public static void main(String[] args) throws Exception {
 		
 	
 		RuokailuDAO ruokailuDao = new RuokailuDAO();
-		ruokailuDao.InsertToDB();
-		ruokailuDao.PrintDB();
+		RuokailuDTO ruokailu = new RuokailuDTO();
+		//ruokailuDao.save(ruokailu);
+		ruokailuDao.findAll();
+		ruokailuDao.findByID("TepiTestaaja");
+		//ruokailuDao.delete(5);
+		//ruokailuDao.deleteAll("TepiTestaaja");
 	}
 }
