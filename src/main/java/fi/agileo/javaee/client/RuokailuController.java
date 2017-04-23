@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fi.agileo.javaee.api.Ruokailu;
 import fi.agileo.javaee.databaseManagement.RuokailuDTO;
 import fi.agileo.javaee.service.RuokailuService;
 
@@ -23,21 +22,36 @@ public class RuokailuController {
 	@Autowired
 	private RuokailuService ruokailuService;
 	
+	
 	// Näytetään index blankkona
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 		return "index";
 	}
 	
+	
 	// Näytetään index tietyn käyttäjän tiedoilla
 	@RequestMapping(value ="/findbyuser", method = RequestMethod.GET)
 	public String indexWithUserData(@RequestParam(value="firstname", required=true) String username, Model model) {
 		List<RuokailuDTO> ruokailuList = ruokailuService.findByID(username);
-		model.addAttribute("ruokailuList", ruokailuList);
+
+		int medianAteriakoko = MedianAteriakoko(ruokailuList);
+		int medianHiilihydraatit = medianHiilihydraatit(ruokailuList);
+		int medianProteiinit = medianProteiinit(ruokailuList);
+		int medianRasvat = medianRasvat(ruokailuList);
+		
+		// Add to model
+		model.addAttribute("ruokailuList", ruokailuList); // Tarvitaanko?
+		model.addAttribute("username", username);
+		model.addAttribute("medianAteriakoko", medianAteriakoko);
+		model.addAttribute("medianHiilihydraatit", medianHiilihydraatit);
+		model.addAttribute("medianProteiinit", medianProteiinit);
+		model.addAttribute("medianRasvat", medianRasvat);
 		return "index";
 	}
 	
-	// Tallennetaan 
+	
+	// Tallennetaan uusi ruokailu tietokantaan
 	@RequestMapping(value = "/save", method = RequestMethod.GET)
 	public String saveRuokailu(
 			@RequestParam(value="kuka", required=true) String nimi,
@@ -87,6 +101,71 @@ public class RuokailuController {
 		
 	}
 	
+	
+	public int MedianAteriakoko(List<RuokailuDTO> ruokailuList) {
+		int keskiarvo = 0;
+		int jakaja = 0;
+		
+		for (int i = 0; i < ruokailuList.size(); i++) {
+			keskiarvo += ruokailuList.get(i).getRuoanMaara();
+			jakaja++;
+		}
+		if (jakaja != 0) {
+			keskiarvo = keskiarvo / jakaja;
+		}
+		return keskiarvo;
+	}
+	
+	
+	public int medianHiilihydraatit(List<RuokailuDTO> ruokailuList) {
+		int keskiarvo = 0;
+		int jakaja = 0;
+		
+		for (int i = 0; i < ruokailuList.size(); i++) {
+			if (ruokailuList.get(i).getHiilihydraatit() != 0 ) {
+				keskiarvo += ruokailuList.get(i).getHiilihydraatit();
+				jakaja++;
+			}
+		}
+		if (jakaja != 0) {
+			keskiarvo = keskiarvo / jakaja;
+		}
+		return keskiarvo;
+	}
+	
+	
+	public int medianProteiinit(List<RuokailuDTO> ruokailuList) {
+		int keskiarvo = 0;
+		int jakaja = 0;
+		
+		for (int i = 0; i < ruokailuList.size(); i++) {
+			if (ruokailuList.get(i).getProteiinit() != 0 ) {
+				keskiarvo += ruokailuList.get(i).getProteiinit();
+				jakaja++;
+			}
+		}
+		if (jakaja != 0) {
+			keskiarvo = keskiarvo / jakaja;
+		}
+		return keskiarvo;
+	}
+	
+	
+	public int medianRasvat(List<RuokailuDTO> ruokailuList) {
+		int keskiarvo = 0;
+		int jakaja = 0;
+		
+		for (int i = 0; i < ruokailuList.size(); i++) {
+			if (ruokailuList.get(i).getRasvat() != 0 ) {
+				keskiarvo += ruokailuList.get(i).getRasvat();
+				jakaja++;
+			}
+		}
+		if (jakaja != 0) {
+			keskiarvo = keskiarvo / jakaja;
+		}
+		return keskiarvo;
+	}	
 	
 
 }
